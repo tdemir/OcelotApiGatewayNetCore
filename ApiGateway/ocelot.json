@@ -1,0 +1,29 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/{url}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 4001
+                }
+            ],
+            "UpstreamPathTemplate": "/person-service/{url}"
+        },
+        {
+            "DownstreamPathTemplate": "/api/{url}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 4002
+                }
+            ],
+            "UpstreamPathTemplate": "/report-service/{url}"
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://localhost:4000"
+    }
+}
