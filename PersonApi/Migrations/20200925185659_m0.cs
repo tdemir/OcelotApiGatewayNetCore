@@ -1,0 +1,65 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace PersonApi.Migrations
+{
+    public partial class m0 : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.CreateTable(
+                name: "Person",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Surname = table.Column<string>(maxLength: 50, nullable: true),
+                    Company = table.Column<string>(maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Person", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CommunicationAddress",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    PersonId = table.Column<Guid>(nullable: false),
+                    TelephoneNumber = table.Column<string>(maxLength: 20, nullable: true),
+                    EmailAddress = table.Column<string>(maxLength: 50, nullable: true),
+                    Location = table.Column<string>(maxLength: 50, nullable: true),
+                    InformationDetail = table.Column<string>(maxLength: 500, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CommunicationAddress", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CommunicationAddress_Person_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "Person",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommunicationAddress_PersonId",
+                table: "CommunicationAddress",
+                column: "PersonId");
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "CommunicationAddress");
+
+            migrationBuilder.DropTable(
+                name: "Person");
+        }
+    }
+}

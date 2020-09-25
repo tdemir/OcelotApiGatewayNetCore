@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +27,10 @@ namespace PersonApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<PersonApi.DbLayer.DatabaseContext>(ServiceLifetime.Transient, ServiceLifetime.Transient);
+            //services.AddDbContext<DbLayer.DatabaseContext>();
+            services.AddScoped<Services.PersonService>();
+            services.AddScoped<Services.CommunicationInformationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

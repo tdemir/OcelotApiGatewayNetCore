@@ -1,0 +1,6 @@
+migration yapma işlemi
+
+cd ./PersonApi
+dotnet ef migrations add m0 --project ..\DbLayer\DbLayer.csproj
+---------------------
+dotnet ef database update 

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Utility;
 
 namespace PersonApi
 {
@@ -13,7 +15,16 @@ namespace PersonApi
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var _host = CreateHostBuilder(args).Build();
+            // using (var db = _host.Services.GetService<DbLayer.DatabaseContext>())
+            // {
+            //     //database yoksa olusturur. migration islemlerini de yapar.
+            //     db.Database.Migrate();
+
+            //     //database yoksa olusturur. migration ile ilgilenmez.
+            //     //db.Database.EnsureCreated();
+            // }
+            _host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

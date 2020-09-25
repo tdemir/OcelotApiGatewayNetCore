@@ -7,10 +7,18 @@ using Microsoft.Extensions.Logging;
 
 namespace ReportApi.Controllers
 {
-     [ApiController]
+    [ApiController]
     [Route("api/[controller]")]
     public class ReportController : ControllerBase
     {
+
+
+        /*
+Rehberdeki kişilerin bulundukları konuma göre istatistiklerini çıkartan bir rapor talebi
+Sistemin oluşturduğu raporların listelenmesi
+Sistemin oluşturduğu bir raporun detay bilgilerinin getirilmesi
+        */
+
         private readonly ILogger<ReportController> _logger;
 
         public ReportController(ILogger<ReportController> logger)
@@ -22,7 +30,7 @@ namespace ReportApi.Controllers
         public IEnumerable<object> Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new 
+            return Enumerable.Range(1, 5).Select(index => new
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
