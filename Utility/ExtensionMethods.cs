@@ -69,5 +69,29 @@ namespace Utility
             }
             return default(T);
         }
+
+        public static void ExecuteCircuitPattern(this Action act, int tryCount = 3, bool throwException = true)
+        {
+            int _tryCount = 0;
+            Exception lastException = null;
+            while (_tryCount < tryCount)
+            {
+                _tryCount++;
+                lastException = null;
+                try
+                {
+                    act();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    lastException = ex;
+                }
+            }
+            if (lastException != null && throwException)
+            {
+                throw lastException;
+            }
+        }
     }
 }

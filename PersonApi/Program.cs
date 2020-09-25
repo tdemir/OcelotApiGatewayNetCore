@@ -16,14 +16,14 @@ namespace PersonApi
         public static void Main(string[] args)
         {
             var _host = CreateHostBuilder(args).Build();
-            // using (var db = _host.Services.GetService<DbLayer.DatabaseContext>())
-            // {
-            //     //database yoksa olusturur. migration islemlerini de yapar.
-            //     db.Database.Migrate();
+            using (var db = _host.Services.GetService<DbLayer.DatabaseContext>())
+            {
+                //database yoksa olusturur. migration islemlerini de yapar.
+                db.Database.Migrate();
 
-            //     //database yoksa olusturur. migration ile ilgilenmez.
-            //     //db.Database.EnsureCreated();
-            // }
+                //database yoksa olusturur. migration ile ilgilenmez.
+                //db.Database.EnsureCreated();
+            }
             _host.Run();
         }
 

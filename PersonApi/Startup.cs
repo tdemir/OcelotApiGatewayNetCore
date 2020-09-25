@@ -28,9 +28,12 @@ namespace PersonApi
         {
             services.AddControllers();
             services.AddDbContext<PersonApi.DbLayer.DatabaseContext>(ServiceLifetime.Transient, ServiceLifetime.Transient);
-            //services.AddDbContext<DbLayer.DatabaseContext>();
+
             services.AddScoped<Services.PersonService>();
             services.AddScoped<Services.CommunicationInformationService>();
+            services.AddTransient<CommonLibrary.RabbitMQService>();
+
+            services.AddHostedService<BackgroundServices.ReportCommunicatorBackgroundService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

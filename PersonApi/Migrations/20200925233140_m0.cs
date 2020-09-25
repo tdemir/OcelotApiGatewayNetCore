@@ -24,7 +24,7 @@ namespace PersonApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CommunicationAddress",
+                name: "CommunicationInformation",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -38,9 +38,9 @@ namespace PersonApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CommunicationAddress", x => x.Id);
+                    table.PrimaryKey("PK_CommunicationInformation", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CommunicationAddress_Person_PersonId",
+                        name: "FK_CommunicationInformation_Person_PersonId",
                         column: x => x.PersonId,
                         principalTable: "Person",
                         principalColumn: "Id",
@@ -48,15 +48,15 @@ namespace PersonApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommunicationAddress_PersonId",
-                table: "CommunicationAddress",
+                name: "IX_CommunicationInformation_PersonId",
+                table: "CommunicationInformation",
                 column: "PersonId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CommunicationAddress");
+                name: "CommunicationInformation");
 
             migrationBuilder.DropTable(
                 name: "Person");

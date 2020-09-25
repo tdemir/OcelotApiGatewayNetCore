@@ -10,8 +10,8 @@ using PersonApi.DbLayer;
 namespace PersonApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200925200323_m1")]
-    partial class m1
+    [Migration("20200925233140_m0")]
+    partial class m0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

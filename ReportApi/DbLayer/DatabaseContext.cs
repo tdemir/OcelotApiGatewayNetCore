@@ -10,6 +10,8 @@ namespace ReportApi.DbLayer
         {
 
         }
+
         public DbSet<Tables.Report> Reports { get; set; }
+        public DbSet<Tables.ReportItem> ReportItems { get; set; }
     }
 }

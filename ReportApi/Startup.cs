@@ -28,6 +28,10 @@ namespace ReportApi
         {
             services.AddControllers();
             services.AddDbContext<DbLayer.DatabaseContext>(ServiceLifetime.Transient, ServiceLifetime.Transient);
+            services.AddScoped<Services.ReportService>();
+            services.AddTransient<CommonLibrary.RabbitMQService>();
+
+            services.AddHostedService<BackgroundServices.ReportConsumerBackgroundService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

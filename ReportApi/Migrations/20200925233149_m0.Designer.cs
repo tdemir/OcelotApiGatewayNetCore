@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using PersonApi.DbLayer;
+using ReportApi.DbLayer;
 
-namespace PersonApi.Migrations
+namespace ReportApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200925185659_m0")]
+    [Migration("20200925233149_m0")]
     partial class m0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace PersonApi.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("PersonApi.DbLayer.Tables.CommunicationAddress", b =>
+            modelBuilder.Entity("ReportApi.DbLayer.Tables.Report", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,13 +30,26 @@ namespace PersonApi.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
-                    b.Property<string>("InformationDetail")
-                        .HasColumnType("character varying(500)")
-                        .HasMaxLength(500);
+                    b.Property<string>("Status")
+                        .HasColumnType("character varying(30)")
+                        .HasMaxLength(30);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Report");
+                });
+
+            modelBuilder.Entity("ReportApi.DbLayer.Tables.ReportItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
@@ -45,54 +58,27 @@ namespace PersonApi.Migrations
                         .HasColumnType("character varying(50)")
                         .HasMaxLength(50);
 
-                    b.Property<Guid>("PersonId")
+                    b.Property<int>("PersonCount")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ReportId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("TelephoneNumber")
-                        .HasColumnType("character varying(20)")
-                        .HasMaxLength(20);
+                    b.Property<int>("TelephoneNumberCount")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("ReportId");
 
-                    b.ToTable("CommunicationAddress");
+                    b.ToTable("ReportItem");
                 });
 
-            modelBuilder.Entity("PersonApi.DbLayer.Tables.Person", b =>
+            modelBuilder.Entity("ReportApi.DbLayer.Tables.ReportItem", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Company")
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("character varying(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Person");
-                });
-
-            modelBuilder.Entity("PersonApi.DbLayer.Tables.CommunicationAddress", b =>
-                {
-                    b.HasOne("PersonApi.DbLayer.Tables.Person", "Person")
+                    b.HasOne("ReportApi.DbLayer.Tables.Report", "Report")
                         .WithMany()
-                        .HasForeignKey("PersonId")
+                        .HasForeignKey("ReportId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

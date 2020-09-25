@@ -13,30 +13,31 @@ namespace ReportApi.Controllers
     {
 
 
-        /*
-Rehberdeki kişilerin bulundukları konuma göre istatistiklerini çıkartan bir rapor talebi
-Sistemin oluşturduğu raporların listelenmesi
-Sistemin oluşturduğu bir raporun detay bilgilerinin getirilmesi
-        */
 
+        private readonly Services.ReportService _reportService;
         private readonly ILogger<ReportController> _logger;
 
-        public ReportController(ILogger<ReportController> logger)
+        public ReportController(Services.ReportService reportService, ILogger<ReportController> logger)
         {
+            _reportService = reportService;
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<object> Get()
+        public List<DbLayer.Tables.Report> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = "Report"
-            })
-            .ToArray();
+            return _reportService.GetReports();
+        }
+        [HttpGet("{reportId}")]
+        public DbLayer.Tables.Report Get(Guid reportId)
+        {
+            return _reportService.GetReport(reportId);
+        }
+
+        [HttpPost("create")]
+        public DbLayer.Tables.Report Post()
+        {
+            return _reportService.Create();
         }
     }
 }

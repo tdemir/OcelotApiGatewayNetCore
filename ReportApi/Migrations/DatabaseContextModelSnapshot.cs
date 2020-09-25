@@ -31,9 +31,54 @@ namespace ReportApi.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("character varying(30)")
+                        .HasMaxLength(30);
+
                     b.HasKey("Id");
 
                     b.ToTable("Report");
+                });
+
+            modelBuilder.Entity("ReportApi.DbLayer.Tables.ReportItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("PersonCount")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ReportId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("TelephoneNumberCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReportId");
+
+                    b.ToTable("ReportItem");
+                });
+
+            modelBuilder.Entity("ReportApi.DbLayer.Tables.ReportItem", b =>
+                {
+                    b.HasOne("ReportApi.DbLayer.Tables.Report", "Report")
+                        .WithMany()
+                        .HasForeignKey("ReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
