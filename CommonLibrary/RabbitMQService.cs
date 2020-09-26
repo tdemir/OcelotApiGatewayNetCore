@@ -8,7 +8,7 @@ using Utility;
 
 namespace CommonLibrary
 {
-    public class RabbitMQService
+    public class RabbitMQService : IMQService
     {
 
         private string _hostname = "127.0.0.1";

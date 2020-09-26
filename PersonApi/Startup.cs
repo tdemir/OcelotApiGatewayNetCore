@@ -29,9 +29,9 @@ namespace PersonApi
             services.AddControllers();
             services.AddDbContext<PersonApi.DbLayer.DatabaseContext>(ServiceLifetime.Transient, ServiceLifetime.Transient);
 
-            services.AddScoped<Services.PersonService>();
-            services.AddScoped<Services.CommunicationInformationService>();
-            services.AddTransient<CommonLibrary.RabbitMQService>();
+            services.AddScoped<Services.IPersonService, Services.PersonService>();
+            services.AddScoped<Services.ICommunicationInformationService, Services.CommunicationInformationService>();
+            services.AddTransient<CommonLibrary.IMQService, CommonLibrary.RabbitMQService>();
 
             services.AddHostedService<BackgroundServices.ReportCommunicatorBackgroundService>();
         }

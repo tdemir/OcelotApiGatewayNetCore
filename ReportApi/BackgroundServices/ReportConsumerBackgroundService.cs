@@ -12,9 +12,9 @@ namespace ReportApi.BackgroundServices
 {
     public class ReportConsumerBackgroundService : BackgroundService
     {
-        private RabbitMQService rabbitMQService;
+        private IMQService rabbitMQService;
         private DbLayer.DatabaseContext db;
-        public ReportConsumerBackgroundService(RabbitMQService rabbitMQService, DbLayer.DatabaseContext db)
+        public ReportConsumerBackgroundService(IMQService rabbitMQService, DbLayer.DatabaseContext db)
         {
             this.rabbitMQService = rabbitMQService;
             this.db = db;

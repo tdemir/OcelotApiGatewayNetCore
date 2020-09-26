@@ -11,13 +11,10 @@ namespace ReportApi.Controllers
     [Route("api/[controller]")]
     public class ReportController : ControllerBase
     {
-
-
-
-        private readonly Services.ReportService _reportService;
+        private readonly Services.IReportService _reportService;
         private readonly ILogger<ReportController> _logger;
 
-        public ReportController(Services.ReportService reportService, ILogger<ReportController> logger)
+        public ReportController(Services.IReportService reportService, ILogger<ReportController> logger)
         {
             _reportService = reportService;
             _logger = logger;

@@ -7,7 +7,7 @@ using PersonApi.DbLayer.Tables;
 
 namespace PersonApi.Services
 {
-    public class PersonService : CommonLibrary.BaseClasses.BaseService<DatabaseContext>
+    public class PersonService : CommonLibrary.BaseClasses.BaseService<DatabaseContext>, IPersonService
     {
         public PersonService(IServiceProvider serviceProvider) : base(serviceProvider)
         {

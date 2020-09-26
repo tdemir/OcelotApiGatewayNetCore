@@ -9,10 +9,10 @@ using CommonLibrary;
 
 namespace ReportApi.Services
 {
-    public class ReportService : CommonLibrary.BaseClasses.BaseService<DatabaseContext>
+    public class ReportService : CommonLibrary.BaseClasses.BaseService<DatabaseContext>, IReportService
     {
-        private RabbitMQService rabbitMQService;
-        public ReportService(RabbitMQService rabbitMQService, IServiceProvider serviceProvider) : base(serviceProvider)
+        private IMQService rabbitMQService;
+        public ReportService(IMQService rabbitMQService, IServiceProvider serviceProvider) : base(serviceProvider)
         {
             this.rabbitMQService = rabbitMQService;
         }

@@ -13,9 +13,9 @@ namespace PersonApi.BackgroundServices
 {
     public class ReportCommunicatorBackgroundService : BackgroundService
     {
-        private RabbitMQService rabbitMQService;
+        private IMQService rabbitMQService;
         private DbLayer.DatabaseContext db;
-        public ReportCommunicatorBackgroundService(RabbitMQService rabbitMQService, DbLayer.DatabaseContext db)
+        public ReportCommunicatorBackgroundService(IMQService rabbitMQService, DbLayer.DatabaseContext db)
         {
             this.rabbitMQService = rabbitMQService;
             this.db = db;

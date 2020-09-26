@@ -28,8 +28,8 @@ namespace ReportApi
         {
             services.AddControllers();
             services.AddDbContext<DbLayer.DatabaseContext>(ServiceLifetime.Transient, ServiceLifetime.Transient);
-            services.AddScoped<Services.ReportService>();
-            services.AddTransient<CommonLibrary.RabbitMQService>();
+            services.AddScoped<Services.IReportService, Services.ReportService>();
+            services.AddTransient<CommonLibrary.IMQService, CommonLibrary.RabbitMQService>();
 
             services.AddHostedService<BackgroundServices.ReportConsumerBackgroundService>();
         }

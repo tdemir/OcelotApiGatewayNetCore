@@ -12,10 +12,10 @@ namespace PersonApi.Controllers
     [Route("api/[controller]")]
     public class PersonController : ControllerBase
     {
-        private readonly Services.PersonService _personService;
+        private readonly Services.IPersonService _personService;
         private readonly ILogger<PersonController> _logger;
 
-        public PersonController(Services.PersonService personService, ILogger<PersonController> logger)
+        public PersonController(Services.IPersonService personService, ILogger<PersonController> logger)
         {
             _personService = personService;
             _logger = logger;

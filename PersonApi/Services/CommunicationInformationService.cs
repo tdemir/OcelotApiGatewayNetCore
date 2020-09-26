@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace PersonApi.Services
 {
-    public class CommunicationInformationService : CommonLibrary.BaseClasses.BaseService<DatabaseContext>
+    public class CommunicationInformationService : CommonLibrary.BaseClasses.BaseService<DatabaseContext>, ICommunicationInformationService
     {
 
         private readonly Lazy<PersonService> lazyPersonService = null;

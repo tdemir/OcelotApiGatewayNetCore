@@ -12,10 +12,10 @@ namespace PersonApi.Controllers
     [Route("api/[controller]")]
     public class CommunicationInformationController : ControllerBase
     {
-        private readonly Services.CommunicationInformationService _communicationInformationService;
+        private readonly Services.ICommunicationInformationService _communicationInformationService;
         private readonly ILogger<CommunicationInformationController> _logger;
 
-        public CommunicationInformationController(Services.CommunicationInformationService communicationInformationService, ILogger<CommunicationInformationController> logger)
+        public CommunicationInformationController(Services.ICommunicationInformationService communicationInformationService, ILogger<CommunicationInformationController> logger)
         {
             _communicationInformationService = communicationInformationService;
             _logger = logger;
