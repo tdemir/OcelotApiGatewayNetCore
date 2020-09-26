@@ -28,3 +28,5 @@ dotnet run
 
 Sonrasında projede olan postman_files klasöründeki collection ve environment dosyalarını postman'e yükleyin.
 Yükledikten sonra tüm requestleri görebilirsiniz.
+
+Not: Uygulama 4000, 4001 ve 4002 portlarını kullanmaktadır. Lütfen bu portları kontrol edin.
