@@ -1,13 +1,13 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CommonLibrary;
-using Microsoft.Extensions.Hosting;
-using Utility;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using CommonLibrary;
 using CommonLibrary.MsmqModel;
+using Utility;
 
 namespace PersonApi.BackgroundServices
 {
@@ -26,7 +26,7 @@ namespace PersonApi.BackgroundServices
             var _connection = rabbitMQService.Consume(CommonLibrary.Constants.MessageQueue.ReportCreateRequest, ReportCreateRequest);
             while (!stoppingToken.IsCancellationRequested)
             {
-                await Task.Delay(100).ConfigureAwait(false);
+                await Task.Delay(100, stoppingToken).ConfigureAwait(false);
             }
             _connection.Close();
             _connection.DisposeWithoutException();
